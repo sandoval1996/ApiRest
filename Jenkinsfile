@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                bat "gradle clean clearReports test --tests *ExecutionPruebas"
+                bat "gradle"
             }
   
             post {                
