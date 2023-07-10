@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Gradle 7.5'
-        jdk 'jdk8'
-    }
-
 
     
     stages {
