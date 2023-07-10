@@ -1,10 +1,17 @@
 pipeline {
     agent any
-  
+
+    tools {
+        maven 'Gradle 7.5'
+        jdk 'jdk8'
+    }
+
+
+    
     stages {
         stage('Test') {
             steps {
-                sh "gradle clean test"
+                sh "./gradlew clean test"
             }
   
             post {                
