@@ -3,12 +3,11 @@ pipeline {
 
 
     
-    stages {
-        stage('Test') {
+    stage('Execute Tests') {
             steps {
-                sh "gradle clean test"
+                sh './gradlew clean test'
             }
-  
+        }
             post {                
                 // If Gradle was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
