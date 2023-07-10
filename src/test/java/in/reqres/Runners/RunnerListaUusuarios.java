@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "C:\\practicaAutomatizacion\\PracticaApis\\src\\test\\resources\\Features\\ListaUsuarios.feature",
+        features = "src/test/resources/Features/ListaUsuarios.feature",
         glue = "in.reqres.StepDefinitions",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         plugin = {"pretty", "summary",

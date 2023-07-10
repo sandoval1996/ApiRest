@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "C:\\practicaAutomatizacion\\PracticaApis\\src\\test\\resources\\Features\\ActualizarUsuario.feature",
+        features = "src/test/resources/Features/ActualizarUsuario.feature",
         glue = "in.reqres.StepDefinitions",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         monochrome = true,
