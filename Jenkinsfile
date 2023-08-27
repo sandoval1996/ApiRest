@@ -2,11 +2,15 @@ pipeline {
     agent any
 
 
+     tools {
+        jdk 'java-1.8'
+        gradle 'Gradle-7.5.1'
+    }
+
     
-     stage('Build') {
+     stage('descargar proyecto git') {
             steps {
-                sh 'chmod +x ./gradlew'
-                sh './gradlew clean build -x test'
+                git branch: 'master',  url: 'https://github.com/sandoval1996/ApiRest.git'
             }
         }
         
