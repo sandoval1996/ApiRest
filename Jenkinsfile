@@ -24,10 +24,8 @@ pipeline {
     }
     post {
         always{
-            zip zipFile: 'reporte.zip', archive: false, dir: 'target/site/serenity'
-            archiveArtifacts artifacts: 'reporte.zip', fingerprint: true
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/site/serenity', reportFiles: 'index.html', reportName: 'Web Report', reportTitles: 'Report'])
-            
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/site/serenity', reportFiles: 'index.html', reportName: ' Web Report', reportTitles: 'serenity Report'])
+            cleanWs()
         }
     }
 }
