@@ -12,11 +12,16 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/sandoval1996/ApiRest.git'
             }
         }
-        stage ('ejecutar pruebas') {
+         stage('Build') {
             steps {
-                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                    sh 'gradle clean clearReports test --tests  *ExecutionPruebas -i'
-                }
+                sh 'chmod +x ./gradlew'
+                sh './gradlew clean build'
+            }
+        }
+        
+        stage('Execute Tests') {
+            steps {
+                sh './gradlew clean test --tests *ExecutionPruebas'
             }
         }
           
