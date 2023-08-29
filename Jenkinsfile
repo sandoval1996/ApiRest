@@ -1,39 +1,33 @@
 pipeline {
     agent any
+    
 
-
-     tools {
+    tools {
         jdk 'java-1.8'
         gradle 'Gradle-7.5.0'
     }
 
-    
-     stage('descargar proyecto git') {
-            steps {
-                git branch: 'master',  url: 'https://github.com/sandoval1996/ApiRest.git'
+    stages {
+        stage('Descargar Proyecto Git') {
+          steps {
+                git branch: 'master', url: 'https://github.com/sandoval1996/ApiRest.git'
             }
         }
-        
-       stage('Execute Tests') {
+        stage ('ejecutar pruebas') {
             steps {
-                sh './gradlew clean test'
-            }
-        }
-            post {                
-                // If Gradle was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-                success {
-                   publishHTML([
-                      allowMissing: false, 
-                      alwaysLinkToLastBuild: false, 
-                      keepAll: false, 
-                      reportDir: 'lib/target/site/serenity/', 
-                      reportFiles: 'index.html', 
-                      reportName: 'Serenity Report', 
-                      reportTitles: '', 
-                      useWrapperFileDirectly: true])
+                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                    sh 'gradle clean clearReports test --tests  *ExecutionPruebas -i'
                 }
             }
+        }
+          
+    }
+    post {
+        always{
+            zip zipFile: 'reporte.zip', archive: false, dir: 'target/site/serenity'
+            archiveArtifacts artifacts: 'reporte.zip', fingerprint: true
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/site/serenity', reportFiles: 'index.html', reportName: 'Web Report', reportTitles: 'Report'])
+            
         }
     }
 }
